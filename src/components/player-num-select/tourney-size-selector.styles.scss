@@ -1,0 +1,29 @@
+.size-selector {
+  width: 22vw;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  align-items: center;
+  position: relative;
+
+  .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-family: "Open Sans Condensed";
+    font-size: 25px;
+    letter-spacing: 0.5px;
+    line-height: 50px;
+    color: red;
+  }
+
+  .num-picker {
+    width: auto;
+    display: flex;
+  }
+
+  .continue-button {
+    width: auto;
+    margin: 10px 0;
+  }
+}
