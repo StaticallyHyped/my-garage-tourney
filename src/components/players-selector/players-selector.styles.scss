@@ -9,10 +9,17 @@
   background-color: rgb(248, 141, 141);
   z-index: 5;
 
-  .player {
-    height: 25px;
+  .players {
+    height: auto;
+    width: auto;
     display: flex;
-    flex-direction: column;
-    overflow: scroll;
+    background-color: yellow;
+
+    .player {
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      overflow: scroll;
+    }
   }
 }
