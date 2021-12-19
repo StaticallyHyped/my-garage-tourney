@@ -8,12 +8,12 @@ import userReducer from "./user/user.reducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["playerCollection"],
+  whitelist: ["players"],
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
-  playerCollection: playersReducer,
+  players: playersReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

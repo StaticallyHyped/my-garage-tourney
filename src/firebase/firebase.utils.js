@@ -17,7 +17,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   /* user not authorized, exit */
   if (!userAuth) return;
   const userRef = firestore.doc(`users/${userAuth.uid}`);
-  const collectionRef = firestore.collection("users");
   /* remember to use await for async calls. The snapshot is just a view of the data,
     can't update the data with it. */
   const snapShot = await userRef.get();

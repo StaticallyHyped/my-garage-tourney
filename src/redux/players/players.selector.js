@@ -1,10 +1,10 @@
 import { createSelector } from "reselect";
 
-const selectPlayer = (state) => state.playerCollection;
+const selectPlayers = (state) => state.players;
 
 export const selectPlayerCollection = createSelector(
-  [selectPlayer],
-  (playerCollection) => playerCollection.players
+  [selectPlayers],
+  (players) => players.collections
 );
 
 /* export const selectCollectionsForTournament = createSelector(
