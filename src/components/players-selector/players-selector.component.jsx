@@ -7,7 +7,7 @@ const PlayersSelector = () => {
   let list = <List items={items} selected={[0]} multiple={true} />;
   return (
     <div className="players-selector">
-      <div className="player">{list}</div>
+      <div className="players">{list}</div>
     </div>
   );
 };

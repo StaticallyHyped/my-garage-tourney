@@ -1,5 +1,6 @@
 .size-selector {
   width: 22vw;
+  min-width: 165px;
   display: flex;
   flex-direction: column;
   height: auto;
@@ -11,7 +12,7 @@
     align-items: center;
     margin-bottom: 5px;
     font-family: "Open Sans Condensed";
-    font-size: 25px;
+    font-size: 20px;
     letter-spacing: 0.5px;
     line-height: 50px;
     color: red;
@@ -23,7 +24,7 @@
   }
 
   .continue-button {
-    width: auto;
+    width: 80%;
     margin: 10px 0;
   }
 }

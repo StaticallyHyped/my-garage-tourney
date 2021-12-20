@@ -1,8 +1,7 @@
-import PLAYERS_DATA from "./players.data";
 import PlayersActionTypes from "./players.types";
 
 const INITIAL_STATE = {
-  playerCollection: PLAYERS_DATA,
+  playerCollections: null,
 };
 
 const playersReducer = (state = INITIAL_STATE, action) => {
@@ -10,7 +9,7 @@ const playersReducer = (state = INITIAL_STATE, action) => {
     case PlayersActionTypes.UPDATE_COLLECTIONS:
       return {
         ...state,
-        collections: action.payload,
+        playerCollections: action.payload,
       };
     default:
       return state;

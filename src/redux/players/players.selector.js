@@ -4,11 +4,18 @@ const selectPlayers = (state) => state.players;
 
 export const selectPlayerCollection = createSelector(
   [selectPlayers],
-  (players) => players.collections
+  (players) => players.playerCollections
 );
 
-/* export const selectCollectionsForTournament = createSelector(
-  [selectionPlayerCollections],
-  (players) => Object.keys(players).map((key) => players[key])
+export const selectCollectionsForTournament = createSelector(
+  [selectPlayerCollection],
+  (playerCollections) =>
+    playerCollections
+      ? Object.keys(playerCollections).map((key) => playerCollections[key])
+      : []
 );
- */
+
+export const selectCollection = (collectionUrlParam) =>
+  createSelector([selectPlayerCollection], (playerCollections) =>
+    playerCollections ? playerCollections[collectionUrlParam] : null
+  );

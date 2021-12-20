@@ -18,6 +18,7 @@ class App extends React.Component {
   /* get/set current user data */
   componentDidMount() {
     //progrommaticcally add our shop data, add it once
+
     const { setCurrentUser } = this.props;
 
     /* onAuthStateChanged is a function which takes a function which returns a 

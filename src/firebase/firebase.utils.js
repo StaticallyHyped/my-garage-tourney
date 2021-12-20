@@ -42,16 +42,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 firebase.initializeApp(config);
 
-/**
- * get a collection from firestore.collection. Remember that it will *always* return
- * a collection, regardless of if that collection contains anything. Never 'null'
- * @param {*} collectionKey
- * @param {*} objectsToAdd
- */
-export const addCollectionAndDocuments = async (
-  collectionKey,
-  objectsToAdd
-) => {
+/** 
+export const addPlayersAndDocuments = async (collectionKey, objectsToAdd) => {
   const collectionRef = firestore.collection(collectionKey);
   //group all calls together into one big request
   const batch = firestore.batch();
@@ -65,6 +57,7 @@ export const addCollectionAndDocuments = async (
   //fire off the batch request.
   return await batch.commit();
 };
+*/
 
 /**
  * convert object instead of the array we'll get back from Firebase
