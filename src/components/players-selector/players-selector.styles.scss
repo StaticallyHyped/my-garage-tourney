@@ -1,5 +1,5 @@
 .players-selector {
-  width: auto;
+  width: 200px;
   height: 340px;
   display: flex;
   flex-direction: column;
@@ -9,9 +9,10 @@
   position: relative;
 
   .players {
-    height: 100%;
-    width: 100%;
-    overflow-y: scroll;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 1.5em;
+    cursor: pointer;
 
     .player {
       height: 25px;
