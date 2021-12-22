@@ -13,11 +13,10 @@ import "./new-tournament.styles.scss";
 import {
   selectCollection,
   selectCollectionsForTournament,
-  selectPlayerItems,
 } from "../../redux/players/players.selector";
 import { createStructuredSelector } from "reselect";
 
-const NewTournament = ({ hidden, collections }) => {
+const NewTournament = ({ hidden }) => {
   const columns = React.useMemo(() => [
     {
       Header: "Name",
@@ -25,25 +24,17 @@ const NewTournament = ({ hidden, collections }) => {
     },
   ]);
 
-  const data = React.useMemo(() => [
-    { name: "Seth" },
-    { name: "John" },
-    { name: "Adam" },
-    { name: "Timi" },
-    { name: "Tyler" },
-    { name: "Cuba" },
-  ]);
-
-  const INITIAL_DATA = React.useMemo(() => [
-    { name: "" },
-    { name: "" },
-    { name: "" },
-    { name: "" },
-  ]);
+  const INITIAL_DATA = React.useMemo(() => [{ name: "" }]);
 
   const collection = useSelector(selectCollection("players"));
   const { items } = collection;
-  const playerNames = items.map((item) => item.name);
+  const playerPool = items.map((item) => {
+    return {
+      name: item.name,
+    };
+  });
+
+  console.log(playerPool);
 
   return (
     <div className="new-tournament-page">
@@ -52,7 +43,7 @@ const NewTournament = ({ hidden, collections }) => {
         {hidden ? null : (
           <Items>
             <Styles>
-              <PlayersSelector columns={columns} data={data} />
+              <PlayersSelector columns={columns} data={playerPool} />
             </Styles>
             <ButtonContainer>
               <ButtonAddRemove />
@@ -79,9 +70,14 @@ const NewTournament = ({ hidden, collections }) => {
   hidden,
   collection,
 }); */
-const mapStateToProps = createStructuredSelector({
-  collections: selectCollectionsForTournament,
+
+const mapStateToProps = ({ newTournament: { hidden } }) => ({
+  hidden,
 });
+
+/* const mapStateToProps = createStructuredSelector({
+  collections: selectCollectionsForTournament,
+}); */
 
 export default connect(mapStateToProps)(NewTournament);
 //export default NewTournament;
