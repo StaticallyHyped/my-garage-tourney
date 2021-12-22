@@ -13,8 +13,6 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 import "./header.styles.scss";
 
 const Header = ({ currentUser }) => {
-  console.log("currentUser");
-  console.log(currentUser);
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -22,7 +20,7 @@ const Header = ({ currentUser }) => {
       </LogoContainer>
       <OptionsContainer>
         <OptionLink to="/">Home</OptionLink>
-        <OptionLink to="/new-tourney">New Tournament</OptionLink>
+        <OptionLink to="/newtourney">New Tournament</OptionLink>
         {currentUser ? (
           <OptionLink as="div" onClick={() => auth.signOut()}>
             Sign Out

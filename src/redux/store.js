@@ -4,7 +4,7 @@ import logger from "redux-logger";
 
 import rootReducer from "./root-reducer";
 
-const middlewares = [logger];
+const middlewares = [];
 
 //if in development mode, push the logger into the array. If build mode,
 //don't show the logger

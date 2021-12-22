@@ -1,6 +1,10 @@
 import React from "react";
 import "./App.css";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+  addPlayersAndDocuments,
+  auth,
+  createUserProfileDocument,
+} from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
@@ -11,6 +15,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import NewTournament from "./pages/new-tournament/new-tournament.component";
 import PrivateRoutes from "./pages/private-routes/PrivateRoutes";
 import SignInPage from "./pages/sign-in/sign-in-page.component";
+import { selectCollectionsForTournament } from "./redux/players/players.selector";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -39,6 +44,11 @@ class App extends React.Component {
       }
       /* if the user logs out, set user to null */
       setCurrentUser(userAuth);
+      //instantiate the db from the hashset instead of manually entering
+      /* addPlayersAndDocuments(
+        "collections",
+        collectionsArray.map(({ title, items }) => ({ title, items }))
+      ); */
     });
   }
 
@@ -52,8 +62,8 @@ class App extends React.Component {
       <div>
         <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/new-tourney" element={<NewTournament />} />
+          <Route path="/*" element={<HomePage />} />
+          <Route path=":collectionId" element={<NewTournament />} />
           <Route
             path="/signin"
             element={

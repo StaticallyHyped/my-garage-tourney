@@ -42,7 +42,13 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 firebase.initializeApp(config);
 
-/** 
+/**
+ * instantiate the firebase data from the PLAYERS_DATA object instead of
+ * manually creating the collection in the db
+ * @param {*} collectionKey
+ * @param {*} objectsToAdd
+ * @returns
+ */
 export const addPlayersAndDocuments = async (collectionKey, objectsToAdd) => {
   const collectionRef = firestore.collection(collectionKey);
   //group all calls together into one big request
@@ -57,7 +63,6 @@ export const addPlayersAndDocuments = async (collectionKey, objectsToAdd) => {
   //fire off the batch request.
   return await batch.commit();
 };
-*/
 
 /**
  * convert object instead of the array we'll get back from Firebase
@@ -79,7 +84,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     };
   });
 
-  //pass in initial object, goes into element. Hats property equal to hats collection, etc
+  //pass in initial object, goes into element. Players property equal to players collection, etc
   return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;

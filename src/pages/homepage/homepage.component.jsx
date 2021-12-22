@@ -1,18 +1,14 @@
 import React from "react";
-import HomepageButton from "../../components/homepage-button/homepage-button.component";
-import "./homepage.styles.scss";
+import { HomePageContainer } from "./homepage.styles";
+import Directory from "../../components/directory/directory.component";
+import { useParams } from "react-router-dom";
 
-const HomePage = () => (
-  <div className="home-page">
-    <h1 className="title">Home Page</h1>
-    <div className="items">
-      <HomepageButton linkTo={"/new-tourney"}>New Tournament</HomepageButton>
-      <HomepageButton linkTo={"/"}>Continue Tournament</HomepageButton>
-      <HomepageButton linkTo={"/"}>
-        View Prior Tournament History
-      </HomepageButton>
-    </div>
-  </div>
-);
+const HomePage = () => {
+  return (
+    <HomePageContainer>
+      <Directory />
+    </HomePageContainer>
+  );
+};
 
 export default HomePage;

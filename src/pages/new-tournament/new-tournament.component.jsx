@@ -1,49 +1,23 @@
 import React from "react";
 import TourneySizeSelector from "../../components/player-num-select/tourney-size-selector.components";
 import PlayersSelector from "../../components/players-selector/players-selector.component";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import {
   ButtonAddRemove,
   ButtonContainer,
   Items,
-  PlayerSelectorContainer,
+  Styles,
 } from "./new-tournament.styles";
 import "./new-tournament.styles.scss";
-import { useParams } from "react-router-dom";
-import { updateCollections } from "../../redux/players/players.actions";
-import styled from "styled-components";
 
-const Styles = styled.div`
-  padding: 5px;
-  table {
-    border-spacing: 0;
-    border: 1px solid black;
-    width: 200px;
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
-    }
-    th,
-    td {
-      margin: 0;
-      padding: 0.5rem;
-      font-weight: bolder;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-      :first-child {
-        width: 10%;
-      }
-      :last-child {
-        border-right: 0;
-      }
-    }
-  }
-`;
+import {
+  selectCollection,
+  selectCollectionsForTournament,
+  selectPlayerItems,
+} from "../../redux/players/players.selector";
+import { createStructuredSelector } from "reselect";
 
-const NewTournament = ({ hidden }) => {
+const NewTournament = ({ hidden, collections }) => {
   const columns = React.useMemo(() => [
     {
       Header: "Name",
@@ -67,6 +41,10 @@ const NewTournament = ({ hidden }) => {
     { name: "" },
   ]);
 
+  const collection = useSelector(selectCollection("players"));
+  const { items } = collection;
+  const playerNames = items.map((item) => item.name);
+
   return (
     <div className="new-tournament-page">
       <TourneySizeSelector />
@@ -89,26 +67,21 @@ const NewTournament = ({ hidden }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
+/* const mapDispatchToProps = (dispatch) => ({
   updateCollections: (collectionsMap) =>
     dispatch(updateCollections(collectionsMap)),
-});
+}); */
 
-const mapStateToProps = ({ newTournament: { hidden } }) => ({
+/* const mapStateToProps = (
+  { newTournament: { hidden } },
+  { collection: { collection } }
+) => ({
   hidden,
+  collection,
+}); */
+const mapStateToProps = createStructuredSelector({
+  collections: selectCollectionsForTournament,
 });
 
-/* function makeData(...lens) {
-const makeDataLevel = (depth = 0) => {
-  const len = lens[depth] {
-    return {
-      name: "Seth",
-      subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
-    }
-  })
-}
-return makeDataLevel();
-
-}; */
-export default connect(mapStateToProps, mapDispatchToProps)(NewTournament);
-//export default connect(mapStateToProps)(NewTournament);
+export default connect(mapStateToProps)(NewTournament);
+//export default NewTournament;
