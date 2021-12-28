@@ -12,9 +12,7 @@ import userReducer from "./user/user.reducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["playersCart"],
-  whitelist: ["tourneyCart"],
-  whitelist: ["newTournament"],
+  whitelist: ["playersCart", "players", "newTournament", "tourneyCart"],
 };
 
 const rootReducer = combineReducers({

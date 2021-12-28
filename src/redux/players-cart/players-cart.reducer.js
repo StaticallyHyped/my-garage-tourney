@@ -10,17 +10,16 @@ const INITIAL_STATE = {
 
 const playersCartReducer = (state = INITIAL_STATE, action) => {
   //switch on the action types:
-  console.log("PC REDUCER 1");
-  console.log(action.type);
-
   switch (action.type) {
     case PlayersCartActionTypes.UPDATE_PLAYER_CART_ITEMS:
-      console.log("PC REDUCER");
+      console.log("UPDATE");
       return {
         ...state,
         cartItems: action.payload,
       };
     case PlayersCartActionTypes.ADD_ITEM: //add the item into the array whenever a user clicks it
+      console.log("ADD");
+
       return {
         ...state,
         //add the existing cart items from state, then cart items from the payload

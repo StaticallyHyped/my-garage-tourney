@@ -10,3 +10,8 @@ export const removeItem = (item) => ({
   type: TourneyCartActionTypes.REMOVE_ITEM,
   payload: item,
 });
+
+export const updateTourneyCartCollections = (collectionsMap) => ({
+  type: TourneyCartActionTypes.UPDATE_TOURNEY_CART_ITEMS,
+  payload: collectionsMap,
+});

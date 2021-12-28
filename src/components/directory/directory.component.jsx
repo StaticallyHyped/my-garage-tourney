@@ -8,6 +8,7 @@ import { updateCollections } from "../../redux/players/players.actions";
 import HomepageButton from "../../components/homepage-button/homepage-button.component";
 import "./directory.styles.scss";
 import { updatePlayersCartCollections } from "../../redux/players-cart/players-cart.actions";
+import { updateTourneyCartCollections } from "../../redux/tourney-cart/tourney-cart.actions";
 
 class Directory extends React.Component {
   state = {
@@ -17,25 +18,46 @@ class Directory extends React.Component {
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
-    const { updateCollections, updatePlayersCartCollections } = this.props;
-    console.log("PROPS");
-    console.log(this.props);
+    const {
+      updateCollections,
+      updatePlayersCartCollections,
+      updateTourneyCartCollections,
+    } = this.props;
+    console.log("comp did mount");
     const collectionRef = firestore.collection("collections");
-    console.log("update colls");
 
     this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
       async (snapshot) => {
+        //Player Collections
         const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
         updateCollections(collectionsMap);
+
+        //New Tournament 'Carts'
+        const { players } = collectionsMap;
+        const { items } = players;
+        const playerPool = items
+          .filter((item) => item.name !== "Seth")
+          .map((item) => {
+            return {
+              name: item.name,
+            };
+          });
+        updatePlayersCartCollections(playerPool);
+        const tourneyPool = items
+          .filter((item) => item.name === "Seth")
+          .map((item) => {
+            return {
+              name: item.name,
+            };
+          });
+        updateTourneyCartCollections(tourneyPool);
+
         this.setState({ loading: false });
       }
     );
-    console.log("update colls");
   }
 
   render() {
-    console.log("STATE");
-    console.log(this.state);
     return (
       <div className="directory-menu">
         <h1 className="title">Home Page</h1>
@@ -51,11 +73,15 @@ class Directory extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  updateCollections: (collectionsMap) =>
-    dispatch(updateCollections(collectionsMap)),
-  updatePlayersCartCollections: (collectionsMap) =>
-    dispatch(updatePlayersCartCollections(collectionsMap)),
-});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCollections: (collectionsMap) =>
+      dispatch(updateCollections(collectionsMap)),
+    updatePlayersCartCollections: (collectionsMap) =>
+      dispatch(updatePlayersCartCollections(collectionsMap)),
+    updateTourneyCartCollections: (collectionsMap) =>
+      dispatch(updateTourneyCartCollections(collectionsMap)),
+  };
+};
 
 export default connect(null, mapDispatchToProps)(Directory);

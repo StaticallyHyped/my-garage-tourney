@@ -1,7 +1,7 @@
 import React from "react";
 import { QuantityPicker } from "react-qty-picker";
 import ContinueButton from "../continue-button/continue-button.components";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import {
   toggleNewTourneyCartsHidden,
   submitQuantity,
@@ -27,7 +27,6 @@ const TourneySizeSelector = ({
         className="num-picker"
         onChange={(value) => updateQuantity(value)}
       ></QuantityPicker>
-      <h3>{value}</h3>
       <div
         className="continue-button"
         onClick={() => {

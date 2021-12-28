@@ -11,11 +11,7 @@ export const removeItem = (item) => ({
   payload: item,
 });
 
-export const updatePlayersCartCollections = (collectionsMap) => (
-  console.log("updatecart"),
-  console.log(collectionsMap),
-  {
-    type: PlayersCartActionTypes.UPDATE_PLAYER_CART_ITEMS,
-    payload: collectionsMap,
-  }
-);
+export const updatePlayersCartCollections = (collectionsMap) => ({
+  type: PlayersCartActionTypes.UPDATE_PLAYER_CART_ITEMS,
+  payload: collectionsMap,
+});

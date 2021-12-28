@@ -1,10 +1,6 @@
 import React from "react";
 import "./App.css";
-import {
-  addPlayersAndDocuments,
-  auth,
-  createUserProfileDocument,
-} from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
@@ -15,7 +11,6 @@ import HomePage from "./pages/homepage/homepage.component";
 import NewTournament from "./pages/new-tournament/new-tournament.component";
 import PrivateRoutes from "./pages/private-routes/PrivateRoutes";
 import SignInPage from "./pages/sign-in/sign-in-page.component";
-import { selectCollectionsForTournament } from "./redux/players/players.selector";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;

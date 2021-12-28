@@ -1,8 +1,7 @@
-import PLAYERS_DATA from "./players.data";
 import PlayersActionTypes from "./players.types";
 
 const INITIAL_STATE = {
-  collections: PLAYERS_DATA,
+  collections: null,
 };
 
 const playersReducer = (state = INITIAL_STATE, action) => {

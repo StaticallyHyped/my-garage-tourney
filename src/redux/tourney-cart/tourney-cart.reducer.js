@@ -11,6 +11,11 @@ const INITIAL_STATE = {
 const tourneyCartReducer = (state = INITIAL_STATE, action) => {
   //switch on the action type: toggle cart hidden, add item to cart
   switch (action.type) {
+    case TourneyCartActionTypes.UPDATE_TOURNEY_CART_ITEMS:
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
     case TourneyCartActionTypes.ADD_ITEM: //add the item into the array whenever a user clicks it
       return {
         ...state,
