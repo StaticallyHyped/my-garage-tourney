@@ -14,9 +14,17 @@ import {
   selectCollection,
   selectCollectionsForTournament,
 } from "../../redux/players/players.selector";
+import { updatePlayersCartCollections } from "../../redux/players-cart/players-cart.actions";
 import { createStructuredSelector } from "reselect";
+import {
+  selectNewTourneyCartsHidden,
+  selectTournamentQuantity,
+} from "../../redux/new-tournament/new-tournament.selectors";
+import { selectPlayersCartItems } from "../../redux/players-cart/players-cart.selectors";
 
-const NewTournament = ({ hidden }) => {
+const NewTournament = ({ hidden, playersCount, playersCart }) => {
+  console.log("hidden");
+  console.log(hidden);
   const columns = React.useMemo(() => [
     {
       Header: "Name",
@@ -24,8 +32,7 @@ const NewTournament = ({ hidden }) => {
     },
   ]);
 
-  const INITIAL_DATA = React.useMemo(() => [{ name: "" }]);
-
+  //get all players the user has stored
   const collection = useSelector(selectCollection("players"));
   const { items } = collection;
   const playerPool = items.map((item) => {
@@ -34,6 +41,23 @@ const NewTournament = ({ hidden }) => {
     };
   });
 
+  updatePlayersCartCollections(playerPool);
+  console.log("playersCart");
+  console.log(playersCart);
+  //initialize the tourney cart and add the appropriate number of rows
+  let tourneyPool = playerPool
+    .filter((item) => item.name == "Seth")
+    .map((item) => {
+      return { name: item.name };
+    });
+
+  if (!hidden) {
+    let i = 0;
+    do {
+      i++;
+      tourneyPool.push({ name: "" });
+    } while (i < playersCount - 1);
+  }
   console.log(playerPool);
 
   return (
@@ -49,7 +73,7 @@ const NewTournament = ({ hidden }) => {
               <ButtonAddRemove />
             </ButtonContainer>
             <Styles>
-              <PlayersSelector columns={columns} data={INITIAL_DATA} />
+              <PlayersSelector columns={columns} data={tourneyPool} />
             </Styles>
           </Items>
         )}
@@ -59,25 +83,17 @@ const NewTournament = ({ hidden }) => {
 };
 
 /* const mapDispatchToProps = (dispatch) => ({
-  updateCollections: (collectionsMap) =>
-    dispatch(updateCollections(collectionsMap)),
+  updatePlayersCartCollections: (playersCartCollectionsMap) =>
+    dispatch(updatePlayersCartCollections(playersCartCollectionsMap)),
 }); */
 
-/* const mapStateToProps = (
-  { newTournament: { hidden } },
-  { collection: { collection } }
-) => ({
-  hidden,
-  collection,
-}); */
-
-const mapStateToProps = ({ newTournament: { hidden } }) => ({
-  hidden,
-});
-
-/* const mapStateToProps = createStructuredSelector({
-  collections: selectCollectionsForTournament,
-}); */
+const mapStateToProps = createStructuredSelector(
+  {
+    hidden: selectNewTourneyCartsHidden,
+    playersCount: selectTournamentQuantity,
+    playersCart: selectPlayersCartItems,
+  },
+  console.log("map state")
+);
 
 export default connect(mapStateToProps)(NewTournament);
-//export default NewTournament;

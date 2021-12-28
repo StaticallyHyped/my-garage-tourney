@@ -6,11 +6,8 @@ import {
 import { connect } from "react-redux";
 import { updateCollections } from "../../redux/players/players.actions";
 import HomepageButton from "../../components/homepage-button/homepage-button.component";
-import NewTournament from "../../pages/new-tournament/new-tournament.component";
-import WithSpinner from "../with-spinner/with-spinner.component";
 import "./directory.styles.scss";
-
-const NewTournamentWithSpinner = WithSpinner(NewTournament);
+import { updatePlayersCartCollections } from "../../redux/players-cart/players-cart.actions";
 
 class Directory extends React.Component {
   state = {
@@ -20,8 +17,11 @@ class Directory extends React.Component {
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
-    const { updateCollections } = this.props;
+    const { updateCollections, updatePlayersCartCollections } = this.props;
+    console.log("PROPS");
+    console.log(this.props);
     const collectionRef = firestore.collection("collections");
+    console.log("update colls");
 
     this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
       async (snapshot) => {
@@ -30,11 +30,12 @@ class Directory extends React.Component {
         this.setState({ loading: false });
       }
     );
+    console.log("update colls");
   }
 
   render() {
+    console.log("STATE");
     console.log(this.state);
-    const { loading } = this.state;
     return (
       <div className="directory-menu">
         <h1 className="title">Home Page</h1>
@@ -53,6 +54,8 @@ class Directory extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   updateCollections: (collectionsMap) =>
     dispatch(updateCollections(collectionsMap)),
+  updatePlayersCartCollections: (collectionsMap) =>
+    dispatch(updatePlayersCartCollections(collectionsMap)),
 });
 
 export default connect(null, mapDispatchToProps)(Directory);

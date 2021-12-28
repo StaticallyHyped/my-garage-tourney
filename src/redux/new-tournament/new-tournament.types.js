@@ -1,5 +1,7 @@
 const NewTournamentActionTypes = {
   TOGGLE_TOURNEY_CARTS_HIDDEN: "TOGGLE_TOURNEY_CARTS_HIDDEN",
+  UPDATE_QUANTITY: "UPDATE_QUANTITY",
+  SUBMIT_QUANTITY: "SUBMIT_QUANTITY",
 };
 
 export default NewTournamentActionTypes;
