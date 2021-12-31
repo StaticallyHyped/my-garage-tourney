@@ -19,7 +19,6 @@ const playersCartReducer = (state = INITIAL_STATE, action) => {
       };
     case PlayersCartActionTypes.ADD_ITEM: //add the item into the array whenever a user clicks it
       console.log("ADD");
-
       return {
         ...state,
         //add the existing cart items from state, then cart items from the payload

@@ -5,16 +5,16 @@ const buttonStyles = css`
   color: white;
   border: none;
   margin: 5px 0;
+  padding: 2px;
+
   &:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
+    opacity: 0.8;
   }
 `;
 
 export const ContinueButtonContainer = styled.button`
-  width: 80%;
-  height: 30px;
+  width: 22vw;
+  border-radius: 10px;
   letter-spacing: 0.5px;
   font-size: 15px;
   text-transform: uppercase;

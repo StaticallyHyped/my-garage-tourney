@@ -6,6 +6,7 @@
   height: auto;
   align-items: center;
   position: relative;
+  margin-bottom: 10px;
 
   .title {
     display: flex;
@@ -21,13 +22,5 @@
   .num-picker {
     width: auto;
     display: flex;
-  }
-
-  .continue-button {
-    display: flex;
-    width: 80%;
-    margin: 10px 0;
-    align-items: center;
-    justify-content: center;
   }
 }

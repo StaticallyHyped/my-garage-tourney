@@ -38,11 +38,10 @@ export const Styles = styled.div`
 
 export const Items = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto 55px auto;
   grid-gap: 0px;
   border: 2px solid black;
   border-radius: 10px;
-  align-content: center;
   width: fit-content;
   margin: 2px;
   flex-direction: column;
@@ -50,12 +49,27 @@ export const Items = styled.div`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  margin: 0px;
-  padding: 0px;
-  align-items: center;
-`;
-export const ButtonAddRemove = styled(AddRemoveButton)`
   width: auto;
   margin: 0px;
-  background-color: purple;
+  padding: 0px;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+export const ButtonAddRemove = styled.button`
+  width: 70px;
+  display: block;
+  font-family: "Open Sans Condensed";
+  font-weight: bolder;
+  background-color: red;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  align-items: center;
+  margin: 1px 0px 1px 0px;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
