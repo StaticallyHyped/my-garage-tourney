@@ -6,6 +6,7 @@ import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
   currentUser: null,
+  error: null,
 };
 
 /* remember that a reducer gets every 'action' that gets fired, even if it's
@@ -15,10 +16,22 @@ const userReducer = (state = INITIAL_STATE, action) => {
   //based on the action.type, if the case of the action type is one we want,
   //render something. Else, return the state.
   switch (action.type) {
-    case UserActionTypes.SET_CURRENT_USER:
+    case UserActionTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
         currentUser: action.payload,
+        error: null,
+      };
+    case UserActionTypes.SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        currentUser: null,
+        error: null,
+      };
+    case UserActionTypes.SIGN_UP_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

@@ -1,5 +1,17 @@
 import React from "react";
 import { useTable, useRowSelect } from "react-table";
+import { createStructuredSelector } from "reselect";
+import {
+  selectTourneyPoolItems,
+  selectPlayerPoolItems,
+} from "../../redux/new-tournament/new-tournament.selectors";
+
+import { connect } from "react-redux";
+import { addItemToPool } from "../../redux/new-tournament/new-tournament.utils";
+import {
+  addPlayerPoolItem,
+  updatePlayerPoolCollection,
+} from "../../redux/new-tournament/new-tournament.actions";
 import "./players-selector.styles.scss";
 
 const IndeterminateCheckbox = React.forwardRef(
@@ -19,7 +31,15 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 );
 
-function PlayersSelector({ columns, data }) {
+function PlayersSelector({
+  columns,
+  data,
+  tableId,
+  playerPoolItems,
+  tourneyPoolItems,
+  addPlayerPoolItem,
+  updatePlayerPoolCollection,
+}) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -27,6 +47,7 @@ function PlayersSelector({ columns, data }) {
     rows,
     prepareRow,
     selectedFlatRows,
+
     state: { selectedRowIds },
   } = useTable(
     {
@@ -58,6 +79,25 @@ function PlayersSelector({ columns, data }) {
       ]);
     }
   );
+
+  console.log("initial player pool");
+  console.log(playerPoolItems);
+
+  if (tableId === "player" && playerPoolItems) {
+    for (let item of selectedFlatRows.map((d) => d.original)) {
+      console.log("add player items to p pool");
+      addPlayerPoolItem(item);
+    }
+  }
+  /* if (tableId === "player" && playerPoolItems) {
+    playerPoolItems = selectedFlatRows.map((d) => d.original);
+    for (let item of playerPoolItems) {
+      addPlayerPoolItem(item);
+    }
+  } */
+
+  console.log("playerPoolItems");
+  console.log(playerPoolItems);
   return (
     <>
       <table {...getTableProps()}>
@@ -85,8 +125,10 @@ function PlayersSelector({ columns, data }) {
           })}
         </tbody>
       </table>
-      {/* <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
-      <pre>
+      <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
+      <p>Table ID: {tableId}</p>
+
+      {/* <pre>
         <code>
           {JSON.stringify(
             {
@@ -104,9 +146,18 @@ function PlayersSelector({ columns, data }) {
   );
 }
 
-/* const mapStateToProps = (state, ownProps) => ({
-  players: selectPlayerCollection,
-}); */
+const mapStateToProps = createStructuredSelector({
+  playerPoolItems: selectPlayerPoolItems,
+  tourneyPoolItems: selectTourneyPoolItems,
+});
 
-//export default connect(mapStateToProps)(PlayersSelector);
-export default PlayersSelector;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updatePlayerPoolCollection: (collectionsMap) =>
+      dispatch(updatePlayerPoolCollection(collectionsMap)),
+    addPlayerPoolItem: (item) => dispatch(addPlayerPoolItem(item)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayersSelector);
+//export default PlayersSelector;

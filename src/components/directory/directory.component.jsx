@@ -23,7 +23,6 @@ class Directory extends React.Component {
       updatePlayersCartCollections,
       updateTourneyCartCollections,
     } = this.props;
-    console.log("comp did mount");
     const collectionRef = firestore.collection("collections");
 
     this.unsubscribeFromSnapshot = collectionRef.onSnapshot(

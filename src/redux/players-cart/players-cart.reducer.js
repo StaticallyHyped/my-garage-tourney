@@ -2,6 +2,7 @@ import PlayersCartActionTypes from "./players-cart.types";
 import {
   addItemsToPlayerCart,
   removeItemFromPlayerCart,
+  removeItemsFromPlayerCart,
 } from "./players-cart.utils";
 
 const INITIAL_STATE = {
@@ -29,6 +30,11 @@ const playersCartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: removeItemFromPlayerCart(state.cartItems, action.payload),
+      };
+    case PlayersCartActionTypes.REMOVE_ITEMS:
+      return {
+        ...state,
+        cartItems: removeItemsFromPlayerCart(state.cartItems, action.payload),
       };
     default:
       return state;

@@ -15,3 +15,8 @@ export const updatePlayersCartCollections = (collectionsMap) => ({
   type: PlayersCartActionTypes.UPDATE_PLAYER_CART_ITEMS,
   payload: collectionsMap,
 });
+
+export const removePlayerItems = (items) => ({
+  type: PlayersCartActionTypes.REMOVE_ITEMS,
+  payload: items,
+});

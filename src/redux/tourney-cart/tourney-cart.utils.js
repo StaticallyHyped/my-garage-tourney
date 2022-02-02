@@ -1,4 +1,4 @@
-export const addItemsToTourneyCart = (cartItems, cartItemToAdd) => {
+export const addItemToTourneyCart = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToAdd.id
   );
@@ -29,4 +29,8 @@ export const removeItemFromTourneyCart = (cartItems, cartItemToRemove) => {
       ? { ...cartItem, quantity: cartItem.quantity - 1 }
       : cartItem
   );
+};
+
+export const addItemsToTourneyCart = (cartItems, cartItemsToAdd) => {
+  return [...cartItems, cartItemsToAdd];
 };

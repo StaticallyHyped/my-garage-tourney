@@ -31,3 +31,10 @@ export const removeItemFromPlayerCart = (cartItems, cartItemToRemove) => {
       : cartItem
   );
 };
+
+export const removeItemsFromPlayerCart = (cartItems, cartItemsToRemove) => {
+  return cartItems.filter(
+    (cartItem) =>
+      !cartItemsToRemove.some((removeItem) => cartItem.name === removeItem.name)
+  );
+};
